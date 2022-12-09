@@ -36,7 +36,7 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
-#.env
+#.env # Added in the git repository for demonstration purpose, but it usually may not because it contain a secret.
 
 # System files
 .DS_Store
