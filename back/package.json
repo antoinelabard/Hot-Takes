@@ -9,8 +9,14 @@
   "author": "Antoine Labard",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.0",
+    "dotenv": "^16.0.3",
+    "email-validator": "^2.0.4",
     "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.8.0",
-    "nodemon": "^2.0.20"
+    "mongoose-unique-validator": "^3.1.0",
+    "nodemon": "^2.0.20",
+    "password-validator": "^5.3.0"
   }
 }

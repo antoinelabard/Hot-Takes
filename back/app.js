@@ -1,6 +1,7 @@
 const express = require('express');
 require('dotenv').config()
 const app = express();
+let authRoutes = require('./routes/auth')
 
 const mongoose = require('mongoose');
 
@@ -9,9 +10,7 @@ mongoose.connect(`mongodb+srv://antoinelabard:${process.env.MONGO_PASSWORD}@clus
     useUnifiedTopology: true })
   .then(() => console.log('Connection to Mongoose successful'))
   .catch(() => console.log('Connection to Mongoose failed'));
-
-app.use((req, res) => {
-    res.json({ message: 'Votre requête a bien été reçue !' });
- });
+ 
+app.use('/api/auth', authRoutes)
 
 module.exports = app;
