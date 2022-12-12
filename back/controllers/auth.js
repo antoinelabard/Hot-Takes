@@ -26,10 +26,6 @@ exports.signup = (req, res, next) => {
         res.status(400).json({ message: "Le mot de passe doit contenir entre 8 et 20 caractères.Il doit avoir au moins une minuscule, une majuscule et 1 chiffre." })
         return
     }
-    if (User.findOne({ email: email })) {
-        res.status(400).json({ message: "Un compte existe déjà avec cette adresse email." })
-        return
-    }
     bcrypt.hash(password, 10)
         .then(hash => {
             const user = new User({
