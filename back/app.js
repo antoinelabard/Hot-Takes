@@ -2,6 +2,7 @@ const express = require('express');
 require('dotenv').config()
 const app = express();
 let authRoutes = require('./routes/auth')
+let sauceRoutes = require('./routes/sauce')
 
 const mongoose = require('mongoose');
 
@@ -12,5 +13,6 @@ mongoose.connect(`mongodb+srv://antoinelabard:${process.env.MONGO_PASSWORD}@clus
   .catch(() => console.log('Connection to Mongoose failed'));
  
 app.use('/api/auth', authRoutes)
+app.use('/api/sauces', sauceRoutes)
 
 module.exports = app;

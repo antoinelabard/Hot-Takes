@@ -5,11 +5,11 @@ const multer = require('../middleware/multer-config')
 
 const userCtrl = require('../controllers/sauce')
 
-router.post('/sauces', auth, multer, userCtrl.addSauce)
-router.put('/sauces/:id', auth, multer, userCtrl.updateSauceById)
-router.delete('/sauces/:id', auth, userCtrl.deleteSauceById)
-router.post('/sauces/:id/like', auth, userCtrl.likeSauceById)
-router.get('/sauces', userCtrl.getSauces)
-router.get('/sauces/:id', userCtrl.getSauceById)
+router.post('', auth, multer, userCtrl.addSauce)
+router.put('/:id', auth, multer, userCtrl.updateSauceById)
+router.delete('/:id', auth, userCtrl.deleteSauceById)
+router.post('/:id/like', auth, userCtrl.likeSauceById)
+router.get('', userCtrl.getSauces)
+router.get('/:id', userCtrl.getSauceById)
 
 module.exports = router
