@@ -26,24 +26,37 @@ exports.getSauceById = (req, res, next) => {
 }
 
 exports.addSauce = (req, res, next) => {
-    if (!req.body.sauce || !req.body.image) {
+    console.log(req.body)
+    const body = JSON.parse(req.body.sauce)
+    if (!body.name ||
+        !body.manufacturer ||
+        !body.description ||
+        !body.mainPepper ||
+        !body.heat ||
+        !body.userId
+    ) {
         res.status(401).json({ "message": "Informations non valides." })
+        return
     }
     const sauce = new Sauce({
-        "name": req.body.sauce,
-        "manufacturer": "",
-        "description": "",
-        "mainPepper": "",
+        "userId": body.userId,
+        "name": body.name,
+        "manufacturer": body.manufacturer,
+        "description": body.description,
+        "mainPepper": body.mainPepper,
         "imageUrl": `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-        "heat": "",
+        "heat": body.heat,
         "likes": 0,
         "dislikes": 0,
-        "usersLiked": [],
-        "usersDisliked": [],
+        "userLiked": [],
+        "userDisliked": [],
     });
+    Sauce.find().then(sauces => {
+        console.log(sauces)
+    })
     sauce.save()
         .then(() => res.status(201).json({ message: 'Sauce ajoutée.' }))
-        .catch(error => res.status(400).json({ error }));
+        .catch(error => console.log(error));
 }
 
 exports.updateSauceById = (req, res, next) => {
