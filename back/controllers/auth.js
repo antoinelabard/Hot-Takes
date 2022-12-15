@@ -42,12 +42,19 @@ exports.signup = (req, res, next) => {
 }
 
 exports.login = (req, res, next) => {
+    const email = req.body.email
+    const password = req.body.password
+    if (!email || !password) {
+        res.status(500).json({ message: "Email ou mot de passe vide." })
+        return
+    }
+
     User.findOne({ email: req.body.email })
         .then(user => {
             if (!user) {
                 return res.status(401).json({ message: 'Paire login/mot de passe incorrecte' })
             }
-            bcrypt.compare(req.body.password, user.password)
+            bcrypt.compare(password, user.password)
                 .then(valid => {
                     if (!valid) {
                         return res.status(401).json({ message: 'Paire login/mot de passe incorrecte' })
