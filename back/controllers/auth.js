@@ -1,6 +1,8 @@
 const User = require('../models/user')
 const emailValidator = require('email-validator')
 const passwordValidator = require('password-validator')
+const bcrypt =require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 var schema = new passwordValidator()
 schema
@@ -22,8 +24,8 @@ exports.signup = (req, res, next) => {
         res.status(400).json({ message: "Email incorrect." })
         return
     }
-    if (!passwordValidator.validate(password)) {
-        res.status(400).json({ message: "Le mot de passe doit contenir entre 8 et 20 caractères.Il doit avoir au moins une minuscule, une majuscule et 1 chiffre." })
+    if (!schema.validate(password)) {
+        res.status(400).json({ message: "Le mot de passe doit contenir entre 8 et 20 caractères.Il doit avoir au moins une minuscule, une majuscule et 2 chiffre." })
         return
     }
     bcrypt.hash(password, 10)
