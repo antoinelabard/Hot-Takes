@@ -37,6 +37,10 @@ app.use(helmet())
 app.use(mongoSanitize())
 app.use('/api/auth', apiLimiter, authRoutes)
 app.use('/api/sauces', sauceRoutes)
+app.use('/images', (_, res, next) => {
+  res.set('Cross-Origin-Resource-Policy', 'cross-origin');
+  next();
+})
 app.use('/images', express.static(path.join(__dirname, 'images')))
 
 module.exports = app
