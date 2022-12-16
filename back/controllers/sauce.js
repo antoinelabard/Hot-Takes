@@ -14,7 +14,7 @@ exports.getSauces = (req, res, next) => {
 }
 
 exports.getSauceById = (req, res, next) => {
-    Sauce.findOne({_id: req.params.id}).then(sauce => {
+    Sauce.findOne({ _id: req.params.id }).then(sauce => {
         res.status(200).json(sauce)
     }).catch(
         (error) => {
@@ -48,8 +48,8 @@ exports.addSauce = (req, res, next) => {
         "heat": body.heat,
         "likes": 0,
         "dislikes": 0,
-        "userLiked": [],
-        "userDisliked": [],
+        "usersLiked": [],
+        "usersDisliked": [],
     });
     Sauce.find().then(sauces => {
         console.log(sauces)
