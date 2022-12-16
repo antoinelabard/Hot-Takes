@@ -116,7 +116,7 @@ exports.likeSauceById = (req, res, next) => {
                     }
                     break
                 case 1: // like
-                    if (likeIndex != -1) {
+                    if (likeIndex == -1) {
                         sauce.usersLiked.push(req.body.userId)
                     }
                     if (dislikeIndex != -1) {
@@ -127,12 +127,14 @@ exports.likeSauceById = (req, res, next) => {
                     if (likeIndex != -1) {
                         sauce.usersLiked.splice(likeIndex, 1)
                     }
-                    if (dislikeIndex != -1) {
+                    if (dislikeIndex == -1) {
                         sauce.usersLiked.push(req.body.userId)
                     }
                     break
             }
-            Sauce.updateOne({ _id: sauce.id }, ...sauce)
+            Sauce.updateOne({ _id: sauce.id }, sauce)
+                .then(() => { res.status(200).json({ message: 'Sauce mise à jour.' }) })
+                .catch(error => res.status(401).json({ error }))
         })
         .catch(error => {
             res.status(500).json({ error })
