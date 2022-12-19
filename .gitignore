@@ -37,7 +37,7 @@ yarn-error.log
 testem.log
 /typings
 #.env # Added in the git repository for demonstration purpose, but it usually may not because it contain a secret.
-back/images/
+images/
 
 # System files
 .DS_Store
