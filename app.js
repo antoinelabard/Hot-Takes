@@ -1,6 +1,6 @@
-const express = require('express');
+const express = require('express')
 require('dotenv').config()
-const app = express();
+const app = express()
 let authRoutes = require('./routes/auth')
 let sauceRoutes = require('./routes/sauce')
 let helmet = require('helmet')
@@ -38,9 +38,10 @@ app.use(mongoSanitize())
 app.use('/api/auth', apiLimiter, authRoutes)
 app.use('/api/sauces', sauceRoutes)
 app.use('/images', (_, res, next) => {
-  res.set('Cross-Origin-Resource-Policy', 'cross-origin');
-  next();
+  res.set('Cross-Origin-Resource-Policy', 'cross-origin')
+  next()
 })
+console.log(">>>>>>>>>>>>>>>>>>>>>>>>" + __dirname)
 app.use('/images', express.static(path.join(__dirname, 'images')))
 
 module.exports = app

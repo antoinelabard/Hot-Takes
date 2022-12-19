@@ -1,6 +1,6 @@
-const Sauce = require('../models/sauce');
-const fs = require('fs');
-const sauce = require('../models/sauce');
+const Sauce = require('../models/sauce')
+const fs = require('fs')
+const sauce = require('../models/sauce')
 
 exports.getSauces = (req, res, next) => {
     Sauce.find().then(sauces => {
@@ -51,13 +51,13 @@ exports.addSauce = (req, res, next) => {
         "dislikes": 0,
         "usersLiked": [],
         "usersDisliked": [],
-    });
+    })
     Sauce.find().then(sauces => {
         console.log(sauces)
     })
     sauce.save()
         .then(() => res.status(201).json({ message: 'Sauce ajoutée.' }))
-        .catch(error => console.log(error));
+        .catch(error => console.log(error))
 }
 
 exports.updateSauceById = (req, res, next) => {
