@@ -1,5 +1,6 @@
 const Sauce = require('../models/sauce');
-const fs = require('fs')
+const fs = require('fs');
+const sauce = require('../models/sauce');
 
 exports.getSauces = (req, res, next) => {
     Sauce.find().then(sauces => {
@@ -62,24 +63,22 @@ exports.addSauce = (req, res, next) => {
 exports.updateSauceById = (req, res, next) => {
     let newSauce = req.file
         ? {
-            ...JSON.parse(req.body),
+            ...JSON.parse(req.body.sauce),
             imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
         }
-        : { ...req.body }
-
-    if (!req.body.sauce || !newSauce.name) {
-        res.status(401).json({ "message": "Informations non valides." })
-    }
-
-    delete newSauce.userId
+        : req.body
     Sauce.findOne({ _id: req.params.id })
         .then((sauce) => {
             if (sauce.userId != req.auth.userId) {
                 res.status(401).json({ message: 'Not authorized' })
+                fs.unlink(`images/${filename}`, () => { })
                 return
             }
-            Sauce.updateOne({ _id: req.params.id }, ...newSauce)
+            Sauce.updateOne({ _id: req.params.id }, newSauce)
+                .then(() => { res.status(200).json({ message: 'Sauce mise à jour.' }) })
+                .catch(error => res.status(401).json({ error }))
         })
+        .catch(error => { res.status(500).json({ error }) })
 }
 
 exports.deleteSauceById = (req, res, next) => {
@@ -136,7 +135,5 @@ exports.likeSauceById = (req, res, next) => {
                 .then(() => { res.status(200).json({ message: 'Sauce mise à jour.' }) })
                 .catch(error => res.status(401).json({ error }))
         })
-        .catch(error => {
-            res.status(500).json({ error })
-        })
+        .catch(error => { res.status(500).json({ error }) })
 }
