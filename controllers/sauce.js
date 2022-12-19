@@ -71,11 +71,16 @@ exports.updateSauceById = (req, res, next) => {
         .then((sauce) => {
             if (sauce.userId != req.auth.userId) {
                 res.status(401).json({ message: 'Not authorized' })
-                fs.unlink(`images/${filename}`, () => { })
                 return
             }
             Sauce.updateOne({ _id: req.params.id }, newSauce)
-                .then(() => { res.status(200).json({ message: 'Sauce mise à jour.' }) })
+                .then(() => {
+                    if (req.file) {
+                        const filename = sauce.imageUrl.split('/images/')[1]
+                        fs.unlink(`images/${filename}`, () => { })
+                    }
+                    res.status(200).json({ message: 'Sauce mise à jour.' })
+                })
                 .catch(error => res.status(401).json({ error }))
         })
         .catch(error => { res.status(500).json({ error }) })
