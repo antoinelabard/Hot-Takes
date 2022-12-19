@@ -10,7 +10,7 @@ const path = require('path')
 
 const mongoose = require('mongoose')
 
-mongoose.connect(`mongodb+srv://antoinelabard:${process.env.MONGO_PASSWORD}@cluster0.bh7ggjl.mongodb.net/?retryWrites=true&w=majority`,
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER}/?retryWrites=true&w=majority`,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true
