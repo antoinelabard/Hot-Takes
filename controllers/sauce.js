@@ -27,7 +27,6 @@ exports.getSauceById = (req, res, next) => {
 }
 
 exports.addSauce = (req, res, next) => {
-    console.log(req.body)
     const body = JSON.parse(req.body.sauce)
     if (!body.name ||
         !body.manufacturer ||
@@ -52,12 +51,9 @@ exports.addSauce = (req, res, next) => {
         "usersLiked": [],
         "usersDisliked": [],
     })
-    Sauce.find().then(sauces => {
-        console.log(sauces)
-    })
     sauce.save()
         .then(() => res.status(201).json({ message: 'Sauce ajoutée.' }))
-        .catch(error => console.log(error))
+        .catch(error => res.status(401).json(error))
 }
 
 exports.updateSauceById = (req, res, next) => {

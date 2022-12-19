@@ -41,7 +41,6 @@ app.use('/images', (_, res, next) => {
   res.set('Cross-Origin-Resource-Policy', 'cross-origin')
   next()
 })
-console.log(">>>>>>>>>>>>>>>>>>>>>>>>" + __dirname)
 app.use('/images', express.static(path.join(__dirname, 'images')))
 
 module.exports = app
