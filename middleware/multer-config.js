@@ -1,10 +1,18 @@
 const multer = require('multer')
+const fs = require('fs')
+
 
 const MIME_TYPES = {
     'image/jpg': 'jpg',
     'image/jpeg': 'jpg',
     'image/png': 'png'
 }
+
+fs.access("images", (error) => {
+    if (error) {
+        fs.mkdir("images", (error) => {})
+    }
+})
 
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
