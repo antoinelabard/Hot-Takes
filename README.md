@@ -14,6 +14,8 @@ npm install
 node server.js
 ```
 
+The frontend of this application is available at this address: [https://github.com/OpenClassrooms-Student-Center/Web-Developer-P6](https://github.com/OpenClassrooms-Student-Center/Web-Developer-P6)
+
 ## Features
 
 - Create an account.
