@@ -1,4 +1,4 @@
-# OhMyFood - Food ordering app
+# Hot Takes - Spicy sauce referencing application
 
 Hot Takes is a spicy sauce referencing application. It allows the users to list, add, modify and like the sauces. 
 
